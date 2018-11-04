@@ -6,33 +6,35 @@
     <title>@ViewData["Title"] - ReminderNotes</title>
 
     <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link href="~/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <environment exclude="Development">
-        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/4.1.1/css/bootstrap.min.css"
+              asp-fallback-href="~/node_modules/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
+
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-dark bg-dark fixed-top navbar-expand-md">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-page="/Index" class="navbar-brand">ReminderNotes</a>
-            </div>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span> &#x2630;
+            </button>
+            <a asp-page="/Index" class="navbar-brand">ReminderNotes</a>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-page="/Index">Home</a></li>
-                    <li><a asp-page="/About">About</a></li>
-                    <li><a asp-page="/Contact">Contact</a></li>
+                    <li class="nav-item">
+                        <a asp-page="/Index" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-page="/About" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-page="/Contact" class="nav-link">Contact</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -43,28 +45,42 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; 2018 - ReminderNotes</p>
+        <footer class="row">
+            <p>&#xA9 2018 - ReminderNotes</p>
         </footer>
     </div>
 
     <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/node_modules/jquery/dist/jquery.js"></script>
+        <script src="~/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/node_modules/jquery-validation/dist/jquery.validate.js"></script>
+        <script src="~/node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
     <environment exclude="Development">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-src="~/node_modules/jquery/dist/jquery.min.js"
                 asp-fallback-test="window.jQuery"
                 crossorigin="anonymous"
                 integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
         </script>
-        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/4.1.1/bootstrap.min.js"
+                asp-fallback-src="~/node_modules/bootstrap/dist/js/bootstrap.min.js"
                 asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
                 crossorigin="anonymous"
                 integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"
+                asp-fallback-src="~/node_modules/jquery-validation/dist/jquery.validate.js"
+                asp-fallback-test="window.jQuery && window.jQuery.validation"
+                crossorigin="anonymous"
+                integrity="sha384-rZfj/ogBloos6wzLGpPkkOr/gpkBNLZ6b6yLy4o+ok+t/SAKlL5mvXLr0OXNi1Hp">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.10/jquery.validate.unobtrusive.min.js"
+                asp-fallback-src="~/node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"
+                asp-fallback-test="window.jQuery && window.jQuery.validator"
+                crossorigin="anonymous"
+                integrity="sha384-y9k3BO+hbWD6gTgtfMyg1egwFmd2oEgQ0fALVtFnCl9F6j6mCh+oCa0P0h+aj7Ii">
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
