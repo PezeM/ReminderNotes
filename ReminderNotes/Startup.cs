@@ -1,9 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ReminderNotes.Data;
 
 namespace ReminderNotes
 {
@@ -26,6 +29,10 @@ namespace ReminderNotes
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddDbContext<ReminderNotesDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("ReminderNotesConnectionString")));
+            services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<ReminderNotesDbContext>();
+
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -47,8 +54,9 @@ namespace ReminderNotes
 
             app.UseStaticFiles();
             app.UseNodeModules(env.ContentRootPath);
-
             app.UseCookiePolicy();
+
+            app.UseAuthentication();
 
             app.UseMvc();
         }
