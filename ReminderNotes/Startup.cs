@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ReminderNotes.Data;
+using System;
 
 namespace ReminderNotes
 {
@@ -31,8 +32,25 @@ namespace ReminderNotes
 
             services.AddDbContext<ReminderNotesDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("ReminderNotesConnectionString")));
-            services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<ReminderNotesDbContext>();
+            services.AddDefaultIdentity<IdentityUser>()
+                .AddEntityFrameworkStores<ReminderNotesDbContext>();
 
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings.
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 8;
+                options.Password.RequiredUniqueChars = 1;
+
+                // Lockout settings.
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
+
+                // User settings.
+                options.User.RequireUniqueEmail = true;
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
