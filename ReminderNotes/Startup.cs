@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ReminderNotes.Data;
 using System;
+using ReminderNotes.Models;
 
 namespace ReminderNotes
 {
@@ -32,7 +33,7 @@ namespace ReminderNotes
 
             services.AddDbContext<ReminderNotesDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("ReminderNotesConnectionString")));
-            services.AddDefaultIdentity<IdentityUser>()
+            services.AddDefaultIdentity<ReminderNotesUser>()
                 .AddEntityFrameworkStores<ReminderNotesDbContext>();
 
             services.Configure<IdentityOptions>(options =>

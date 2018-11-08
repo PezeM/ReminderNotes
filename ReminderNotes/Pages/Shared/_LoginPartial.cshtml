@@ -1,6 +1,7 @@
 @using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@using ReminderNotes.Models
+@inject SignInManager<ReminderNotesUser> SignInManager
+@inject UserManager<ReminderNotesUser> UserManager
 
 @if (SignInManager.IsSignedIn(User))
 {

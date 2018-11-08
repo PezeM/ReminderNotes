@@ -9,21 +9,22 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using ReminderNotes.Models;
 
 namespace ReminderNotes.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly ILogger<RegisterModel> _logger;
+        private readonly SignInManager<ReminderNotesUser> _signInManager;
+        private readonly UserManager<ReminderNotesUser> _userManager;
+        private readonly ILogger<ReminderNotesUser> _logger;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
-            ILogger<RegisterModel> logger,
+            UserManager<ReminderNotesUser> userManager,
+            SignInManager<ReminderNotesUser> signInManager,
+            ILogger<ReminderNotesUser> logger,
             IEmailSender emailSender)
         {
             _userManager = userManager;
@@ -39,6 +40,16 @@ namespace ReminderNotes.Areas.Identity.Pages.Account
 
         public class InputModel
         {
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Nickname")]
+            public string Nickname { get; set; }
+
+            [Required]
+            [DataType(DataType.Date)]
+            [Display(Name = "Birth date")]
+            public DateTime DateOfBirth { get; set; }
+
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
@@ -66,7 +77,14 @@ namespace ReminderNotes.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
+                // Create new user
+                var user = new ReminderNotesUser
+                {
+                    UserName = Input.Email,
+                    Nickname = Input.Nickname,
+                    DateOfBirth = Input.DateOfBirth,
+                    Email = Input.Email
+                };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

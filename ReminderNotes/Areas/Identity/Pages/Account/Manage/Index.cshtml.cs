@@ -1,25 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using ReminderNotes.Models;
 
 namespace ReminderNotes.Areas.Identity.Pages.Account.Manage
 {
     public partial class IndexModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<ReminderNotesUser> _userManager;
+        private readonly SignInManager<ReminderNotesUser> _signInManager;
         private readonly IEmailSender _emailSender;
 
         public IndexModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
+            UserManager<ReminderNotesUser> userManager,
+            SignInManager<ReminderNotesUser> signInManager,
             IEmailSender emailSender)
         {
             _userManager = userManager;
@@ -39,6 +38,16 @@ namespace ReminderNotes.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Nickname")]
+            public string Nickname { get; set; }
+
+            [Required]
+            [DataType(DataType.Date)]
+            [Display(Name = "Birth date")]
+            public DateTime DateOfBirth { get; set; }
+
             [Required]
             [EmailAddress]
             public string Email { get; set; }
@@ -64,6 +73,8 @@ namespace ReminderNotes.Areas.Identity.Pages.Account.Manage
 
             Input = new InputModel
             {
+                Nickname = user.Nickname,
+                DateOfBirth = user.DateOfBirth,
                 Email = email,
                 PhoneNumber = phoneNumber
             };
@@ -86,6 +97,19 @@ namespace ReminderNotes.Areas.Identity.Pages.Account.Manage
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
+            // Set new nickname
+            if (Input.Nickname != user.Nickname)
+            {
+                user.Nickname = Input.Nickname;
+            }
+
+            // Set new date of birth
+            if (Input.DateOfBirth != user.DateOfBirth)
+            {
+                user.DateOfBirth = Input.DateOfBirth;
+            }
+
+            // Set new email
             var email = await _userManager.GetEmailAsync(user);
             if (Input.Email != email)
             {
@@ -97,6 +121,7 @@ namespace ReminderNotes.Areas.Identity.Pages.Account.Manage
                 }
             }
 
+            // Set new phone number
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             if (Input.PhoneNumber != phoneNumber)
             {
@@ -107,6 +132,8 @@ namespace ReminderNotes.Areas.Identity.Pages.Account.Manage
                     throw new InvalidOperationException($"Unexpected error occurred setting phone number for user with ID '{userId}'.");
                 }
             }
+
+            await _userManager.UpdateAsync(user);
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
