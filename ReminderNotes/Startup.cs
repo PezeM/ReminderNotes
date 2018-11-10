@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using ReminderNotes.Data;
 using System;
 using ReminderNotes.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace ReminderNotes
 {
@@ -33,7 +35,7 @@ namespace ReminderNotes
 
             services.AddDbContext<ReminderNotesDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("ReminderNotesConnectionString")));
-            services.AddDefaultIdentity<ReminderNotesUser>()
+            services.AddDefaultIdentity<ReminderNotesUser>().AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ReminderNotesDbContext>();
 
             services.Configure<IdentityOptions>(options =>
@@ -53,7 +55,11 @@ namespace ReminderNotes
                 options.User.RequireUniqueEmail = true;
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(config =>
+            {
+                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
