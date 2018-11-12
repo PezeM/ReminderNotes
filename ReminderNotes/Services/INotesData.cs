@@ -7,7 +7,7 @@ namespace ReminderNotes.Services
     {
         IEnumerable<Note> GetAll();
         Note Get(int id);
-        Note Add(Note note);
+        void Add(Note note);
         Note Remove(Note note);
         Note Update(Note note);
     }

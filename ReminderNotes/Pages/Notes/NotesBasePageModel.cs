@@ -1,18 +1,18 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using ReminderNotes.Data;
 using ReminderNotes.Models;
+using ReminderNotes.Services;
 
 namespace ReminderNotes.Pages.Notes
 {
     public class NotesBasePageModel : PageModel
     {
-        protected ReminderNotesDbContext Context { get; }
+        protected INotesData Context { get; }
         protected IAuthorizationService AuthorizationService { get; }
         protected UserManager<ReminderNotesUser> UserManager { get; }
 
-        public NotesBasePageModel(ReminderNotesDbContext context,
+        public NotesBasePageModel(INotesData context,
             IAuthorizationService authorizationService,
             UserManager<ReminderNotesUser> userManager) : base()
         {

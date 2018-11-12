@@ -15,11 +15,10 @@ namespace ReminderNotes.Services
             _context = context;
         }
 
-        public Note Add(Note note)
+        public void Add(Note note)
         {
             _context.Notes.Add(note);
             _context.SaveChanges();
-            return note;
         }
 
         public Note Get(int id)
