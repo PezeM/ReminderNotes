@@ -1,8 +1,16 @@
 ﻿@page
-@model ReminderNotes.Pages.NotesModel
+@model NotesModel
 @{
     ViewData["Title"] = "Notes";
 }
 
 <h2>All notes</h2>
 
+<div>
+    <a asp-page="/Create" class="btn btn-primary">Add new restaurant</a>
+</div>
+
+@foreach (var note in Model.Notes)
+{
+    @Html.Partial("_Summary", note);
+}
