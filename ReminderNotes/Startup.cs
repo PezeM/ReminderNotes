@@ -12,6 +12,7 @@ using ReminderNotes.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using ReminderNotes.Authorization;
+using ReminderNotes.Services;
 
 namespace ReminderNotes
 {
@@ -38,6 +39,9 @@ namespace ReminderNotes
                 options.UseSqlServer(Configuration.GetConnectionString("ReminderNotesConnectionString")));
             services.AddDefaultIdentity<ReminderNotesUser>().AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ReminderNotesDbContext>();
+
+            // Notes database
+            services.AddScoped<INotesData, SqlNoteData>();
 
             services.Configure<IdentityOptions>(options =>
             {
