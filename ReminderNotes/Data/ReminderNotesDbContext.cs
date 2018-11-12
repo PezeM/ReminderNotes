@@ -6,6 +6,8 @@ namespace ReminderNotes.Data
 {
     public class ReminderNotesDbContext : IdentityDbContext<ReminderNotesUser>
     {
+        public DbSet<Note> Notes { get; set; }
+
         public ReminderNotesDbContext(DbContextOptions<ReminderNotesDbContext> options) : base(options)
         {
 
