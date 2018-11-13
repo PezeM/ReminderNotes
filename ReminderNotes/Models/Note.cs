@@ -18,10 +18,12 @@ namespace ReminderNotes.Models
 
         [Required]
         [Display(Name = "Title")]
+        [MaxLength(150)]
         public string Title { get; set; }
 
         [Required]
         [Display(Name = "Content")]
+        [MaxLength(2000)]
         public string Content { get; set; }
     }
 }

@@ -10,7 +10,9 @@
     <a asp-page="/Create" class="btn btn-primary">Add new restaurant</a>
 </div>
 
-@foreach (var note in Model.Notes)
-{
-    @Html.Partial("_Summary", note);
-}
+<div class="card-deck">
+    @foreach (var note in Model.Notes)
+    {
+        @Html.Partial("_Summary", note);
+    }
+</div>
