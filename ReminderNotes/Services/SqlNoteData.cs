@@ -22,6 +22,11 @@ namespace ReminderNotes.Services
             _context.SaveChanges();
         }
 
+        public Task<Note> FindAsync(int id)
+        {
+            return _context.Notes.FindAsync(id);
+        }
+
         public Note Get(int id)
         {
             return _context.Notes.FirstOrDefault(n => n.NoteId == id);
@@ -42,11 +47,16 @@ namespace ReminderNotes.Services
             return _context.Notes.OrderBy(n => n.CreateTime);
         }
 
-        public Note Remove(Note note)
+        public void Remove(Note note)
         {
             _context.Notes.Remove(note);
             _context.SaveChanges();
-            return note;
+        }
+
+        public async Task RemoveAsync(Note note)
+        {
+            _context.Notes.Remove(note);
+            await _context.SaveChangesAsync();
         }
 
         public Note Update(Note note)
