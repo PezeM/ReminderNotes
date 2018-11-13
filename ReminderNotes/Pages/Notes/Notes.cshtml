@@ -1,14 +1,14 @@
 ﻿@page
 @model NotesModel
 @{
-    ViewData["Title"] = "Notes";
+    ViewData["Title"] = "All notes";
 }
 
 <h2>All notes</h2>
 
-<div>
-    <a asp-page="/Create" class="btn btn-primary">Add new restaurant</a>
-</div>
+
+<a asp-page="/Create" class="btn btn-primary">Add new restaurant</a>
+
 
 <div class="card-deck">
     @foreach (var note in Model.Notes)

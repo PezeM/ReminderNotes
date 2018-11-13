@@ -11,7 +11,7 @@ namespace ReminderNotes.Pages
 {
     public class NotesModel : NotesBasePageModel
     {
-        public IList<Note> Notes { get; set; }
+        public IEnumerable<Note> Notes { get; set; }
 
         public NotesModel(INotesData context,
             IAuthorizationService authorizationService,
@@ -26,9 +26,7 @@ namespace ReminderNotes.Pages
             var currentUserId = UserManager.GetUserId(User);
 
             // Get all notes created by this user
-            notes = notes.Where(n => n.OwnerId == currentUserId);
-
-            Notes = notes.ToList();
+            Notes = notes.Where(n => n.OwnerId == currentUserId);
         }
     }
 }
