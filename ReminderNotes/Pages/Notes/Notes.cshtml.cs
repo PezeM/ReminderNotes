@@ -25,8 +25,8 @@ namespace ReminderNotes.Pages
 
             var currentUserId = UserManager.GetUserId(User);
 
-            // Get all notes created by this user
-            Notes = notes.Where(n => n.OwnerId == currentUserId);
+            // Get all notes created by this user and order them. Expiring newest
+            Notes = notes.Where(n => n.OwnerId == currentUserId).OrderBy(n => n.ExpireTime);
         }
     }
 }
