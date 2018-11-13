@@ -42,7 +42,7 @@ namespace ReminderNotes.Pages
 
             Context.Add(Note);
 
-            return RedirectToPage("/Notes/Notes");
+            return RedirectToPage("./Notes");
         }
     }
 }

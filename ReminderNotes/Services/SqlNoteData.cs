@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ReminderNotes.Data;
 using ReminderNotes.Models;
@@ -23,7 +24,17 @@ namespace ReminderNotes.Services
 
         public Note Get(int id)
         {
-            return _context.Notes.FirstOrDefault(r => r.NoteId == id);
+            return _context.Notes.FirstOrDefault(n => n.NoteId == id);
+        }
+
+        public async Task<Note> GetAsync(int id)
+        {
+            return await _context.Notes.FirstOrDefaultAsync(n => n.NoteId == id);
+        }
+
+        public async Task<Note> GetAsNoTrackingAsync(int id)
+        {
+            return await _context.Notes.AsNoTracking().FirstOrDefaultAsync(n => n.NoteId == id);
         }
 
         public IEnumerable<Note> GetAll()

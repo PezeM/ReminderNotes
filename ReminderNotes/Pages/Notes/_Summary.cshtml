@@ -7,8 +7,8 @@
         <p class="card-text">
             @Model.Content
         </p>
-        <a href="#" class="card-link">Edit</a>
-        <a href="#" class="card-link">Delete</a>
+        <a asp-page="./Edit" asp-route-id="@Model.NoteId" class="card-link">Edit</a>
+        <a asp-page="./Edit" asp-route-id="@Model.NoteId" class="card-link">Delete</a>
     </div>
     <div class="card-footer">
         <small class="text-muted">Created @Model.CreateTime</small>
