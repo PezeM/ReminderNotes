@@ -7,12 +7,13 @@
 <h2>All notes</h2>
 
 
-<a asp-page="/Create" class="btn btn-primary">Add new restaurant</a>
-
-
-<div class="card-deck">
+<div class="row">
+    <div class="col-md-4 align-self-center">
+        <a asp-page="./Create" style="height: 80%;" class="btn btn-lg btn-primary">Add new restaurant</a>
+    </div>
     @foreach (var note in Model.Notes)
     {
-        @Html.Partial("_Summary", note);
+        @Html.Partial("_Summary", note)
+        ;
     }
 </div>

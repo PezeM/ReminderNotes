@@ -1,16 +1,18 @@
 ﻿@model Note
 
-<div class="card">
-    <div class="card-body">
-        <h4 class="card-title">@Model.Title</h4>
-        <h6 class="card-subtitle mb-2 text-muted">@Model.ExpireTime</h6>
-        <p class="card-text">
-            @Model.Content
-        </p>
-        <a asp-page="./Edit" asp-route-id="@Model.NoteId" class="card-link">Edit</a>
-        <a asp-page="./Delete" asp-route-id="@Model.NoteId" class="card-link">Delete</a>
-    </div>
-    <div class="card-footer">
-        <small class="text-muted">Created @Model.CreateTime</small>
+<div class="col-md-4">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">@Model.Title</h4>
+            <h6 class="card-subtitle mb-2 text-muted">@Model.ExpireTime</h6>
+            <p class="card-text">
+                @Model.Content
+            </p>
+            <a asp-page="./Edit" asp-route-id="@Model.NoteId" class="card-link">Edit</a>
+            <a asp-page="./Delete" asp-route-id="@Model.NoteId" class="card-link">Delete</a>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">Created @Model.CreateTime</small>
+        </div>
     </div>
 </div>
