@@ -1,0 +1,39 @@
+﻿@page "{id:int}"
+@model ReminderNotes.Pages.Notes.EditModel
+@{
+    ViewData["Title"] = "Edit note";
+}
+
+<h2>Edit note</h2>
+
+<form method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Note.NoteId" />
+    <div class="form-group">
+        <label asp-for="Note.Title" class="control-label"></label>
+        <input asp-for="Note.Title" class="form-control" />
+        <span asp-validation-for="Note.Title" class="text-danger" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Note.Content" class="control-label"></label>
+        <textarea asp-for="Note.Content" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="Note.Content" class="text-danger" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Note.ExpireTime" class="control-label"></label>
+        <input asp-for="Note.ExpireTime" class="form-control" />
+        <span asp-validation-for="Note.ExpireTime" class="text-danger" />
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+</form>
+
+<a asp-page="/Notes">Back to list of notes</a>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

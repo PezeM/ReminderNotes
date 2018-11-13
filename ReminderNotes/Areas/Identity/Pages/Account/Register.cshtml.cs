@@ -83,8 +83,10 @@ namespace ReminderNotes.Areas.Identity.Pages.Account
                     UserName = Input.Email,
                     Nickname = Input.Nickname,
                     DateOfBirth = Input.DateOfBirth,
-                    Email = Input.Email
+                    Email = Input.Email,
+                    NotesCreated = 0
                 };
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

@@ -1,0 +1,44 @@
+﻿@page
+@model CreateModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Add new note</h2> <br />
+
+<h4>Note</h4>
+<form method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Note.Title" class="control-label"></label>
+        <input asp-for="Note.Title" class="form-control" />
+        <span asp-validation-for="Note.Title" class="text-danger" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Note.Content" class="control-label"></label>
+        <textarea asp-for="Note.Content" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="Note.Content" class="text-danger" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Note.ExpireTime" class="control-label"></label>
+        <input asp-for="Note.ExpireTime" class="form-control" />
+        <span asp-validation-for="Note.ExpireTime" class="text-danger" />
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+
+</form>
+
+<div>
+    <a asp-page="/Notes/Notes">Back to list of notes</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+

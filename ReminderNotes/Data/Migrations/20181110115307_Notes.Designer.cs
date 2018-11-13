@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ReminderNotes.Data;
 
 namespace ReminderNotes.Migrations
 {
     [DbContext(typeof(ReminderNotesDbContext))]
-    partial class ReminderNotesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181110115307_Notes")]
+    partial class Notes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -131,29 +133,6 @@ namespace ReminderNotes.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("ReminderNotes.Models.Note", b =>
-                {
-                    b.Property<int>("NoteId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Content")
-                        .IsRequired();
-
-                    b.Property<DateTime>("CreateTime");
-
-                    b.Property<DateTime>("ExpireTime");
-
-                    b.Property<string>("OwnerId");
-
-                    b.Property<string>("Title")
-                        .IsRequired();
-
-                    b.HasKey("NoteId");
-
-                    b.ToTable("Notes");
                 });
 
             modelBuilder.Entity("ReminderNotes.Models.ReminderNotesUser", b =>
