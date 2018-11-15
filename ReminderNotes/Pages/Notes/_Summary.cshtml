@@ -9,7 +9,9 @@
                 @Model.Content
             </p>
             <a asp-page="./Edit" asp-route-id="@Model.NoteId" class="card-link">Edit</a>
-            <a asp-page="./Delete" asp-route-id="@Model.NoteId" class="card-link">Delete</a>
+            <form method="post">
+                <button type="submit" class="btn btn-danger" asp-page-handler="delete" asp-route-id="@Model.NoteId">Delete</button>
+            </form>
         </div>
         <div class="card-footer">
             <small class="text-muted">Created @Model.CreateTime</small>
